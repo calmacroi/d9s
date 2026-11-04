@@ -84,11 +84,12 @@ func NewApp(d *Docker, refresh time.Duration, initial string) *App {
 	}
 	a.info = tview.NewTextView().SetDynamicColors(true)
 	a.hints = tview.NewTextView().SetDynamicColors(true)
-	logo := tview.NewTextView().SetDynamicColors(true).SetTextAlign(tview.AlignRight).SetText(logoText)
+	logo := tview.NewTextView().SetDynamicColors(true).SetText(logoText())
 	header := tview.NewFlex().
 		AddItem(a.info, 52, 0, false).
 		AddItem(a.hints, 0, 1, false).
-		AddItem(logo, 26, 0, false)
+		AddItem(logo, 26, 0, false).
+		AddItem(nil, 1, 0, false)
 
 	a.table = tview.NewTable().SetSelectable(true, false).SetFixed(1, 0)
 	a.table.SetBorder(true).SetBorderPadding(0, 0, 1, 1)
@@ -134,12 +135,27 @@ func NewApp(d *Docker, refresh time.Duration, initial string) *App {
 	return a
 }
 
-const logoText = `[orange::b]     _  ___
-[orange::b]  __| |/ _ \ ___
-[orange::b] / _` + "`" + ` | (_) / __|
-[orange::b]| (_| |\__, \__ \
-[orange::b] \__,_|  /_/|___/
-[gray]docker · compose`
+// logoRows spell "d9s" in block letters; every row has the same width so the
+// logo stays aligned, and each row gets one step of the color gradient.
+var logoRows = []string{
+	"██████╗  █████╗ ███████╗",
+	"██╔══██╗██╔══██╗██╔════╝",
+	"██║  ██║╚██████║███████╗",
+	"██║  ██║ ╚═══██║╚════██║",
+	"██████╔╝ █████╔╝███████║",
+	"╚═════╝  ╚════╝ ╚══════╝",
+}
+
+var logoGradient = []string{"#00f0ff", "#00c8ff", "#3d9bff", "#6f6bff", "#9b4dff", "#c64dff"}
+
+func logoText() string {
+	var b strings.Builder
+	for i, row := range logoRows {
+		fmt.Fprintf(&b, "[%s::b]%s[-::-]\n", logoGradient[i], row)
+	}
+	b.WriteString("[gray]  docker · compose · tui")
+	return b.String()
+}
 
 // Run starts the refresh loop and blocks until the user quits.
 func (a *App) Run() error {

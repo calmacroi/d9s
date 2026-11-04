@@ -1,0 +1,21 @@
+# Throwaway project used by the d9s end-to-end test; never touches real stacks.
+name: d9s-e2e
+services:
+  web:
+    image: alpine:latest
+    command: ["sh", "-c", "touch /tmp/ready && echo web started && sleep infinity"]
+    ports: ["18089:8080"]
+    volumes: ["data:/data"]
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/ready"]
+      interval: 2s
+      retries: 3
+  worker:
+    image: alpine:latest
+    command: ["sh", "/scripts/worker.sh"]
+    volumes: ["./worker.sh:/scripts/worker.sh:ro"]
+  idle:
+    image: alpine:latest
+    command: ["sleep", "infinity"]
+volumes:
+  data: {}

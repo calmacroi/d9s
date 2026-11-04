@@ -95,3 +95,7 @@ make e2e     # end-to-end UI test against the local daemon
 grouping, logs, describe, ports, start/stop/restart, compose up/stop/restart/rm/down and
 deletes. It only touches `d9s-e2e*` resources and ends with `compose down` of that project.
 Set `D9S_E2E_OUT=<dir>` to keep screen dumps of every step.
+
+## License
+
+d9s is licensed under the [Apache License 2.0](LICENSE).

@@ -16,6 +16,9 @@ Requires Go ≥ 1.25 and the Docker CLI with the compose plugin.
 ```bash
 go install github.com/calmacroi/d9s@latest   # → $(go env GOPATH)/bin/d9s
 ```
+```brew
+brew install calmacroi/tap/d9s
+```
 
 Or from a clone:
 

@@ -18,9 +18,15 @@ for `exec` and `compose`.
 Requires Go ≥ 1.25 and the Docker CLI with the compose plugin.
 
 ```bash
+go install github.com/calmacroi/d9s@latest   # → $(go env GOPATH)/bin/d9s
+```
+
+Or from a clone:
+
+```bash
+git clone https://github.com/calmacroi/d9s.git
 cd d9s
-make install        # go install → $(go env GOPATH)/bin/d9s
-# or: make build && ./d9s
+make install        # or: make build && ./d9s
 ```
 
 ## Usage

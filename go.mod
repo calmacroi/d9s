@@ -1,4 +1,4 @@
-module github.com/symbiocommerce/d9s
+module github.com/calmacroi/d9s
 
 go 1.25
 

@@ -9,10 +9,6 @@ It is a single Go binary (tview + the Docker Engine SDK). It reads the daemon
 of your current `docker context` (or `DOCKER_HOST`), and calls the `docker` CLI
 for `exec` and `compose`.
 
-> Already-existing alternatives: [lazydocker](https://github.com/jesseduffield/lazydocker)
-> (installed via Homebrew on this machine) and [ctop](https://github.com/bcicen/ctop).
-> d9s is for those who want k9s muscle memory (`:`, `/`, drill-down, `esc` back).
-
 ## Install
 
 Requires Go ≥ 1.25 and the Docker CLI with the compose plugin.
